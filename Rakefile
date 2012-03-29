@@ -3,5 +3,7 @@ task :run do
   require File.expand_path('app/application')
   require 'rack/handler/webrick'
   app = Application.start_rack_app
-  Rack::Handler::WEBrick.run(app, :Port => 3000)
+  server = Rack::Server.new :app => app, :server => 'webrick', :Port => 3000
+  server.start
+end
 end
