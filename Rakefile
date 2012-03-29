@@ -6,4 +6,8 @@ task :run do
   server = Rack::Server.new :app => app, :server => 'webrick', :Port => 3000
   server.start
 end
+
+desc "Open application in browser"
+task :open do
+  `open http://localhost:3000/index.html`
 end
