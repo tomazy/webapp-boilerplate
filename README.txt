@@ -1,8 +1,12 @@
-Run 
+Run:
+  $ rake
+to build the app and run specs.
+
+Run
   $ bundle exec guard
 to auto-generate application files (html, css, js)
 
-Run 
+Run
   $ rake run
 to run local server. Point your browser to http://localhost:3000/index.html to access
 the application.
