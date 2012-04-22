@@ -1,10 +1,8 @@
+Javascript web application skeleton.
+
 Run:
   $ rake
-to build the app and run specs.
-
-Run
-  $ bundle exec guard
-to auto-generate application files (html, css, js)
+to run specs.
 
 Run
   $ rake run
