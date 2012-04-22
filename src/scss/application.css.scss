@@ -1,2 +1,5 @@
-body{
+//= require_self
+$background-color: #bada55;
+body {
+  background-color: $background-color;
 }

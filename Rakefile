@@ -1,17 +1,3 @@
-desc "Run web server on port 3000"
-task :run do
-  require File.expand_path('app/application')
-  require 'rack/handler/webrick'
-  app = Application.start_rack_app
-  server = Rack::Server.new :app => app, :server => 'webrick', :Port => 3000
-  server.start
-end
-
-desc "Open application in browser"
-task :open do
-  `open http://localhost:3000/index.html`
-end
-
 begin
   require 'jasmine'
   load 'jasmine/tasks/jasmine.rake'
@@ -31,8 +17,30 @@ task :build do
   end
 end
 
+desc "Run web server on port 3000"
+#task :run => [:build] do
+task :run do
+  require File.expand_path('app/application')
+  require 'rack/handler/webrick'
+  app = Application.start_rack_app
+  server = Rack::Server.new :app => app, :server => 'webrick', :Port => 3000
+  server.start
+end
+
+desc "Open application in browser"
+task :open do
+  `open http://localhost:3000/index.html`
+end
+
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec => ["build"])
 
+require 'jasmine-headless-webkit'
+desc "Headless javascript tests"
+Jasmine::Headless::Task.new('jasmine:headless') do |t|
+  t.colors = true
+  t.keep_on_error = true
+end
+
 desc "Default task runs specs"
-task :default => ["spec", "jasmine:ci"]
+task :default => ["spec", "jasmine:headless"]

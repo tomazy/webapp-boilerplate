@@ -10,8 +10,9 @@
 #   - lib/source2.js
 #   - dist/**/*.js
 #
+#
 src_files:
-    - public/js/**/*.js
+    - src/js/**/*.js
 
 # stylesheets
 #
