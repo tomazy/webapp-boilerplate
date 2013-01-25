@@ -6,19 +6,6 @@ group :build do
     :all_on_start => true do
     watch %r{^src/haml/.+\.html\.haml}
   end
-
-  # CSS
-  #guard 'sass',
-  #  :input => 'src/scss',
-  #  :output => 'public/css',
-  #  :extension => '',
-  #  :all_on_start => true
-
-  ## JavaScript
-  #guard 'shell',
-  #  :all_on_start => true do
-  #  watch(%r{^src/js/(.+.js)}) {|m| `mkdir -p public/js && cp -v #{m[0]} public/js/#{m[1]}` }
-  #end
 end
 
 group :test do
@@ -44,4 +31,11 @@ group :test do
     watch(%r{^app/assets/javascripts/(.*)\.(js|coffee)$}) { |m| newest_js_file(spec_location % m[1]) }
     watch(%r{^spec/javascripts/(.*)_spec\..*}) { |m| newest_js_file(spec_location % m[1]) }
   end
+end
+
+guard 'livereload' do
+  watch(%r{src/haml/(.+)\.haml}) { |m| "/#{m[1]}" }
+  watch(%r{src/js/.+\.js}){ |m| "/assets/application.js" }
+  watch(%r{src/scss/(.+)\.scss}) { |m| "/assets/#{m[1]}" }
+  watch(%r{(app|vendor)/assets/\w+/(.+\.(css|js|html)).*})  { |m| "/assets/#{m[2]}" }
 end
